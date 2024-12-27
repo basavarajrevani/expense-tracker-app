@@ -1,0 +1,51 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+*.log
+logs/
+*.out
+*.pid
+
+# Environment variables
+.env
+
+# Build outputs
+dist/
+build/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE and editor specific files
+.vscode/
+.idea/
+*.iml
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+*.swo
+*.~*
+
+# Coverage reports
+coverage/
+
+# Generated files
+*.lock
+*.cache
+
+# Ignore Python virtual environments (if applicable)
+venv/
+__pycache__/
+*.py[cod]
+
+# Ignore compiled Java files (if applicable)
+*.class
+
+# Ignore other platform or language-specific files
