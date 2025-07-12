@@ -12,6 +12,7 @@ import Transactions from './Components/Transactions/Transactions';
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 import PrivateRoute from './Components/Auth/PrivateRoute';
+import NotFound from './Components/NotFound/NotFound';
 import { GlobalProvider } from './context/globalContext';
 import { AuthProvider } from './context/authContext';
 
@@ -74,6 +75,10 @@ function App() {
           </MainLayout>
         </PrivateRoute>
       )
+    },
+    {
+      path: "*",
+      element: <NotFound />
     }
   ]);
 
