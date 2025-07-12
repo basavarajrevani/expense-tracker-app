@@ -13,6 +13,7 @@ import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 import PrivateRoute from './Components/Auth/PrivateRoute';
 import NotFound from './Components/NotFound/NotFound';
+import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
 import { GlobalProvider } from './context/globalContext';
 import { AuthProvider } from './context/authContext';
 
@@ -83,14 +84,16 @@ function App() {
   ]);
 
   return (
-    <AuthProvider>
-      <GlobalProvider>
-        <AppStyled bg={bg}>
-          <Orb />
-          <RouterProvider router={router} />
-        </AppStyled>
-      </GlobalProvider>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <GlobalProvider>
+          <AppStyled bg={bg}>
+            <Orb />
+            <RouterProvider router={router} />
+          </AppStyled>
+        </GlobalProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

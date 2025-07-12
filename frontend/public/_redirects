@@ -1,1 +1,21 @@
+# Static assets first (highest priority)
+/static/*  /static/:splat  200
+/images/*  /images/:splat  200
+/css/*     /css/:splat     200
+/js/*      /js/:splat      200
+/favicon.ico  /favicon.ico  200
+/manifest.json  /manifest.json  200
+
+# API routes should not be redirected
+/api/*  https://expense-tracker-backend-dnpy.onrender.com/api/:splat  200
+
+# App routes - redirect to index.html for React Router
+/dashboard  /index.html  200
+/income     /index.html  200
+/expenses   /index.html  200
+/transactions  /index.html  200
+/login      /index.html  200
+/register   /index.html  200
+
+# Catch all other routes
 /*    /index.html   200
