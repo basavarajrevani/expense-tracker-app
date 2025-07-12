@@ -217,6 +217,131 @@ const ExpenseStyled = styled.div`
             }
         }
     }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .expense-content {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .header {
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .total-expense {
+            padding: 1rem 1.5rem;
+
+            .amount {
+                .title {
+                    font-size: 1rem;
+                }
+
+                .value {
+                    font-size: 1.8rem;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .header {
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+
+            h1 {
+                font-size: 1.6rem;
+                padding-left: 0.8rem;
+
+                &::before {
+                    width: 0.25rem;
+                }
+            }
+        }
+
+        .total-expense {
+            padding: 1rem;
+
+            .amount {
+                .title {
+                    font-size: 0.9rem;
+                }
+
+                .value {
+                    font-size: 1.6rem;
+                }
+            }
+        }
+
+        .expense-content {
+            gap: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .header {
+            gap: 1rem;
+            margin-bottom: 1rem;
+
+            h1 {
+                font-size: 1.4rem;
+                padding-left: 0.6rem;
+            }
+        }
+
+        .total-expense {
+            padding: 0.8rem;
+            border-radius: 15px;
+
+            .amount {
+                gap: 0.3rem;
+
+                .title {
+                    font-size: 0.8rem;
+                }
+
+                .value {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+
+        .expense-content {
+            gap: 0.8rem;
+        }
+
+        .no-data {
+            padding: 1rem;
+
+            p {
+                font-size: 1rem;
+            }
+
+            small {
+                font-size: 0.8rem;
+            }
+        }
+    }
+
+    @media (max-width: 360px) {
+        .header {
+            h1 {
+                font-size: 1.2rem;
+            }
+        }
+
+        .total-expense {
+            padding: 0.6rem;
+
+            .amount {
+                .value {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
 `;
 
 export default Expenses;

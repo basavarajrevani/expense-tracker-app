@@ -142,8 +142,13 @@ const FormStyled = styled.form`
         resize: none;
         box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
         color: rgba(34, 34, 96, 0.9);
+        transition: all 0.3s ease;
         &::placeholder {
             color: rgba(34, 34, 96, 0.4);
+        }
+        &:focus {
+            border-color: var(--color-green);
+            box-shadow: 0px 1px 15px rgba(66, 173, 0, 0.2);
         }
     }
     .input-control {
@@ -169,6 +174,64 @@ const FormStyled = styled.form`
                 opacity: 0.8;
                 transform: translateY(-2px);
             }
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        gap: 1.5rem;
+
+        input, textarea, select {
+            padding: 0.6rem 0.8rem;
+            font-size: 0.9rem;
+            border-radius: 8px;
+        }
+
+        .selects {
+            justify-content: stretch;
+
+            select {
+                width: 100%;
+            }
+        }
+
+        .submit-btn {
+            button {
+                width: 100%;
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        gap: 1rem;
+
+        input, textarea, select {
+            padding: 0.5rem 0.6rem;
+            font-size: 0.8rem;
+            border-radius: 6px;
+        }
+
+        textarea {
+            rows: 3;
+        }
+
+        .submit-btn {
+            button {
+                padding: 0.7rem 0.8rem;
+                font-size: 0.8rem;
+                border-radius: 20px;
+            }
+        }
+    }
+
+    @media (max-width: 360px) {
+        gap: 0.8rem;
+
+        input, textarea, select {
+            padding: 0.4rem 0.5rem;
+            font-size: 0.75rem;
         }
     }
 `;

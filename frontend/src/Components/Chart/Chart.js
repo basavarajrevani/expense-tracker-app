@@ -98,109 +98,159 @@ function Chart() {
         }]
     };
 
-    const lineOptions = {
-        plugins: {
-            legend: {
-                display: true,
-                position: 'top',
-                align: 'end',
-                labels: {
-                    boxWidth: 15,
-                    padding: 20,
-                    usePointStyle: true,
-                    font: {
-                        size: 12,
-                        weight: 500
+    // Responsive chart options
+    const getResponsiveOptions = () => {
+        const isMobile = window.innerWidth <= 768;
+        const isTablet = window.innerWidth <= 1024;
+
+        return {
+            plugins: {
+                legend: {
+                    display: true,
+                    position: isMobile ? 'bottom' : 'top',
+                    align: isMobile ? 'center' : 'end',
+                    labels: {
+                        boxWidth: isMobile ? 12 : 15,
+                        padding: isMobile ? 10 : 20,
+                        usePointStyle: true,
+                        font: {
+                            size: isMobile ? 10 : isTablet ? 11 : 12,
+                            weight: 500
+                        }
                     }
-                }
-            },
-            title: {
-                display: true,
-                text: 'Income vs Expenses Over Time'
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                grid: {
-                    color: 'rgba(0, 0, 0, 0.1)',
-                    drawBorder: false
                 },
-                ticks: {
-                    padding: 10,
+                title: {
+                    display: true,
+                    text: 'Income vs Expenses Over Time',
                     font: {
-                        size: 11
+                        size: isMobile ? 12 : isTablet ? 14 : 16,
+                        weight: 'bold'
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: isMobile ? 10 : 20
                     }
                 }
             },
-            x: {
-                grid: {
-                    display: false,
-                    drawBorder: false
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)',
+                        drawBorder: false
+                    },
+                    ticks: {
+                        padding: isMobile ? 5 : 10,
+                        font: {
+                            size: isMobile ? 9 : isTablet ? 10 : 11
+                        },
+                        maxTicksLimit: isMobile ? 5 : 8
+                    }
                 },
-                ticks: {
-                    padding: 10,
-                    font: {
-                        size: 11
+                x: {
+                    grid: {
+                        display: false,
+                        drawBorder: false
+                    },
+                    ticks: {
+                        padding: isMobile ? 5 : 10,
+                        font: {
+                            size: isMobile ? 9 : isTablet ? 10 : 11
+                        },
+                        maxTicksLimit: isMobile ? 4 : isTablet ? 6 : 10,
+                        maxRotation: isMobile ? 45 : 0
                     }
                 }
-            }
-        },
-        responsive: true,
-        maintainAspectRatio: false,
-        layout: {
-            padding: {
-                left: 10,
-                right: 20,
-                top: 20,
-                bottom: 10
-            }
-        },
-        elements: {
-            line: {
-                tension: 0.4
             },
-            point: {
-                radius: 4,
-                hitRadius: 8,
-                hoverRadius: 6
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            },
+            layout: {
+                padding: {
+                    left: isMobile ? 5 : 10,
+                    right: isMobile ? 5 : 20,
+                    top: isMobile ? 10 : 20,
+                    bottom: isMobile ? 5 : 10
+                }
+            },
+            elements: {
+                line: {
+                    tension: 0.4
+                },
+                point: {
+                    radius: isMobile ? 3 : 4,
+                    hitRadius: isMobile ? 6 : 8,
+                    hoverRadius: isMobile ? 4 : 6
+                }
             }
-        }
+        };
     };
 
-    const barOptions = {
-        plugins: {
-            legend: {
-                display: false
-            },
-            title: {
-                display: true,
-                font: {
-                    size: 16,
-                    weight: 'bold'
-                },
-                padding: {
-                    top: 10,
-                    bottom: 30
-                }
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                grid: {
-                    color: 'rgba(0, 0, 0, 0.1)'
-                }
-            },
-            x: {
-                grid: {
+    const getBarOptions = () => {
+        const isMobile = window.innerWidth <= 768;
+        const isTablet = window.innerWidth <= 1024;
+
+        return {
+            plugins: {
+                legend: {
                     display: false
+                },
+                title: {
+                    display: false // We'll use custom titles
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)',
+                        drawBorder: false
+                    },
+                    ticks: {
+                        font: {
+                            size: isMobile ? 9 : isTablet ? 10 : 11
+                        },
+                        maxTicksLimit: isMobile ? 4 : 6
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false,
+                        drawBorder: false
+                    },
+                    ticks: {
+                        font: {
+                            size: isMobile ? 8 : isTablet ? 9 : 10
+                        },
+                        maxRotation: isMobile ? 45 : 0,
+                        callback: function(value, index, values) {
+                            const label = this.getLabelForValue(value);
+                            if (isMobile && label.length > 8) {
+                                return label.substring(0, 8) + '...';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            },
+            layout: {
+                padding: {
+                    left: isMobile ? 5 : 10,
+                    right: isMobile ? 5 : 10,
+                    top: isMobile ? 5 : 10,
+                    bottom: isMobile ? 5 : 10
                 }
             }
-        },
-        responsive: true,
-        maintainAspectRatio: true,
-        aspectRatio: 2.5/3.5
+        };
     };
 
     return (
@@ -209,20 +259,20 @@ function Chart() {
                 <div className="chart-container line-chart">
                     <h2>Income vs Expenses Overview</h2>
                     <div className="line-chart-wrapper">
-                        <Line data={lineData} options={lineOptions} />
+                        <Line data={lineData} options={getResponsiveOptions()} />
                     </div>
                 </div>
                 <div className="categories-container">
                     <div className="chart-item income-chart">
-                        <h2>Income Categories</h2>
+                        <h3>Income Categories</h3>
                         <div className="chart-wrapper">
-                            <Bar data={incomesBarData} options={barOptions} />
+                            <Bar data={incomesBarData} options={getBarOptions()} />
                         </div>
                     </div>
                     <div className="chart-item expense-chart">
-                        <h2>Expense Categories</h2>
+                        <h3>Expense Categories</h3>
                         <div className="chart-wrapper">
-                            <Bar data={expensesBarData} options={barOptions} />
+                            <Bar data={expensesBarData} options={getBarOptions()} />
                         </div>
                     </div>
                 </div>
@@ -238,11 +288,15 @@ const ChartStyled = styled.div`
     padding: 2rem;
     border-radius: 20px;
     height: 100%;
+    width: 100%;
+    overflow: hidden;
 
     .analytics {
         display: flex;
         flex-direction: column;
-        gap: 3rem;
+        gap: 2rem;
+        width: 100%;
+        height: 100%;
     }
 
     .chart-container {
@@ -252,17 +306,18 @@ const ChartStyled = styled.div`
         box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.04);
         transition: all 0.3s ease-in-out;
         width: 100%;
+        overflow: hidden;
 
         &:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.08);
         }
 
         &.line-chart {
-            height: 400px;
+            height: 450px;
             display: flex;
             flex-direction: column;
-            padding: 1.5rem 2rem;
+            min-height: 350px;
         }
     }
 
@@ -270,15 +325,21 @@ const ChartStyled = styled.div`
         flex: 1;
         position: relative;
         width: 100%;
+        height: 100%;
         margin-top: 1rem;
-        min-height: 300px;
+        min-height: 280px;
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
     }
 
     .categories-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-bottom: 3rem;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        width: 100%;
     }
 
     .chart-item {
@@ -287,52 +348,212 @@ const ChartStyled = styled.div`
         padding: 1.5rem;
         box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.04);
         transition: all 0.3s ease-in-out;
+        min-height: 350px;
+        display: flex;
+        flex-direction: column;
 
         &:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.08);
         }
 
         &.income-chart {
-            border-left: 4px solid rgba(0, 208, 132, 1);
+            border-left: 4px solid var(--color-green);
         }
 
         &.expense-chart {
-            border-left: 4px solid rgba(255, 84, 84, 1);
+            border-left: 4px solid #e74c3c;
         }
     }
 
     .chart-wrapper {
-        height: calc(100vw * (3.5/2.5) * 0.25);
-        max-height: 400px;
-        min-height: 300px;
+        flex: 1;
+        position: relative;
         width: 100%;
+        height: 280px;
         margin-top: 1rem;
-        margin-bottom: 2rem;
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
     }
 
     h2 {
-        color: #333;
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+        font-size: clamp(1.2rem, 3vw, 1.8rem);
+        font-weight: 700;
+        margin-bottom: 1rem;
         text-align: center;
+        line-height: 1.3;
+    }
+
+    h3 {
+        color: var(--primary-color);
+        font-size: clamp(1rem, 2.5vw, 1.4rem);
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+        text-align: center;
+        line-height: 1.3;
+    }
+
+    /* Enhanced Responsive Design */
+    @media (max-width: 1200px) {
+        padding: 1.5rem;
+
+        .analytics {
+            gap: 1.5rem;
+        }
+
+        .chart-container.line-chart {
+            height: 400px;
+            min-height: 320px;
+        }
+
+        .chart-item {
+            min-height: 320px;
+        }
+
+        .chart-wrapper {
+            height: 250px;
+        }
+
+        .line-chart-wrapper {
+            min-height: 250px;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        padding: 1.2rem;
+
+        .categories-container {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .chart-container.line-chart {
+            height: 380px;
+            min-height: 300px;
+        }
+
+        .chart-item {
+            min-height: 300px;
+            padding: 1.2rem;
+        }
+
+        .chart-wrapper {
+            height: 220px;
+        }
+
+        .line-chart-wrapper {
+            min-height: 220px;
+        }
     }
 
     @media (max-width: 768px) {
         padding: 1rem;
-        
+
+        .analytics {
+            gap: 1rem;
+        }
+
         .categories-container {
             grid-template-columns: 1fr;
+            gap: 1rem;
         }
 
-        h2 {
-            font-size: 1.2rem;
+        .chart-container {
+            padding: 1rem;
+            border-radius: 12px;
+
+            &.line-chart {
+                height: 320px;
+                min-height: 280px;
+            }
         }
 
-        .line-chart-wrapper, .chart-wrapper {
+        .chart-item {
+            min-height: 280px;
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .chart-wrapper {
+            height: 200px;
+            margin-top: 0.8rem;
+        }
+
+        .line-chart-wrapper {
+            min-height: 200px;
+            margin-top: 0.8rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 0.8rem;
+
+        .analytics {
+            gap: 0.8rem;
+        }
+
+        .chart-container {
+            padding: 0.8rem;
+            border-radius: 10px;
+
+            &.line-chart {
+                height: 280px;
+                min-height: 250px;
+            }
+        }
+
+        .chart-item {
             min-height: 250px;
+            padding: 0.8rem;
+            border-radius: 10px;
         }
+
+        .chart-wrapper {
+            height: 180px;
+            margin-top: 0.6rem;
+        }
+
+        .line-chart-wrapper {
+            min-height: 180px;
+            margin-top: 0.6rem;
+        }
+    }
+
+    @media (max-width: 360px) {
+        padding: 0.6rem;
+
+        .chart-container {
+            padding: 0.6rem;
+
+            &.line-chart {
+                height: 250px;
+                min-height: 220px;
+            }
+        }
+
+        .chart-item {
+            min-height: 220px;
+            padding: 0.6rem;
+        }
+
+        .chart-wrapper {
+            height: 160px;
+        }
+
+        .line-chart-wrapper {
+            min-height: 160px;
+        }
+    }
+
+    /* Ensure charts are always visible */
+    canvas {
+        display: block !important;
+        max-width: 100% !important;
+        height: auto !important;
     }
 `;
 

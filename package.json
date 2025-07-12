@@ -1,0 +1,37 @@
+{
+  "name": "expense-tracker-app",
+  "version": "1.0.0",
+  "description": "A comprehensive expense tracker application built with React.js and Node.js",
+  "main": "backend/app.js",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
+    "build": "cd frontend && npm run build",
+    "install-backend": "cd backend && npm install",
+    "install-frontend": "cd frontend && npm install",
+    "install-all": "npm run install-backend && npm run install-frontend",
+    "heroku-postbuild": "npm run install-all && npm run build"
+  },
+  "keywords": [
+    "expense-tracker",
+    "budget",
+    "finance",
+    "react",
+    "nodejs",
+    "mongodb",
+    "full-stack"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/expense-tracker-app.git"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

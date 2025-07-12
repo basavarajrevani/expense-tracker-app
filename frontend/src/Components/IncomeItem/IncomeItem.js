@@ -221,14 +221,123 @@ const IncomeItemStyled = styled.div`
         }
     }
 
+    /* Enhanced Responsive Design */
+    @media (max-width: 1024px) {
+        padding: 0.9rem;
+        gap: 1.2rem;
+
+        .icon-container {
+            .icon {
+                width: 70px;
+                height: 70px;
+
+                i {
+                    font-size: 1.8rem;
+                }
+            }
+
+            .category {
+                font-size: 0.8rem;
+            }
+        }
+
+        .content {
+            .header {
+                h5 {
+                    font-size: 1.1rem;
+                }
+
+                .amount {
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    }
+
     @media (max-width: 768px) {
+        padding: 0.8rem;
+        gap: 1rem;
+        border-radius: 15px;
+
+        .icon-container {
+            .icon {
+                width: 60px;
+                height: 60px;
+
+                i {
+                    font-size: 1.6rem;
+                }
+            }
+
+            .category {
+                font-size: 0.75rem;
+                max-width: 60px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+
+        .content {
+            .header {
+                gap: 0.8rem;
+
+                h5 {
+                    font-size: 1rem;
+                    line-height: 1.3;
+                }
+
+                .amount {
+                    font-size: 1.2rem;
+                }
+            }
+
+            .footer {
+                gap: 0.8rem;
+
+                .info {
+                    gap: 0.6rem;
+
+                    .date, .description {
+                        font-size: 0.8rem;
+
+                        i {
+                            font-size: 1rem;
+                        }
+                    }
+
+                    .description {
+                        max-width: 150px;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 1rem;
+        padding: 0.8rem;
+        gap: 0.8rem;
+        border-radius: 12px;
 
         .icon-container {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
+
+            .icon {
+                width: 50px;
+                height: 50px;
+
+                i {
+                    font-size: 1.4rem;
+                }
+            }
+
+            .category {
+                font-size: 0.7rem;
+                max-width: 50px;
+            }
         }
 
         .content {
@@ -237,15 +346,98 @@ const IncomeItemStyled = styled.div`
             .header {
                 flex-direction: column;
                 gap: 0.5rem;
+                align-items: center;
+
+                h5 {
+                    font-size: 0.9rem;
+                    margin: 0;
+                }
+
+                .amount {
+                    font-size: 1.1rem;
+                }
             }
 
             .footer {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 0.8rem;
+                align-items: center;
 
                 .info {
                     flex-direction: column;
-                    gap: 0.5rem;
+                    gap: 0.4rem;
+                    align-items: center;
+
+                    .date, .description {
+                        font-size: 0.75rem;
+                        justify-content: center;
+
+                        i {
+                            font-size: 0.9rem;
+                        }
+                    }
+
+                    .description {
+                        max-width: 120px;
+                    }
+                }
+
+                button {
+                    padding: 0.6rem !important;
+
+                    i {
+                        font-size: 0.9rem !important;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 360px) {
+        padding: 0.6rem;
+        gap: 0.6rem;
+        border-radius: 10px;
+
+        .icon-container {
+            .icon {
+                width: 45px;
+                height: 45px;
+
+                i {
+                    font-size: 1.2rem;
+                }
+            }
+
+            .category {
+                font-size: 0.65rem;
+                max-width: 45px;
+            }
+        }
+
+        .content {
+            .header {
+                h5 {
+                    font-size: 0.85rem;
+                }
+
+                .amount {
+                    font-size: 1rem;
+                }
+            }
+
+            .footer {
+                .info {
+                    .date, .description {
+                        font-size: 0.7rem;
+                    }
+
+                    .description {
+                        max-width: 100px;
+                    }
+                }
+
+                button {
+                    padding: 0.5rem !important;
                 }
             }
         }

@@ -243,29 +243,150 @@ const DashboardStyled = styled.div`
         }
     }
 
+    /* Enhanced Responsive Design */
     @media (max-width: 1200px) {
-        padding: 1rem;
-        
+        padding: 1.5rem;
+
         h1 {
             font-size: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .stats-con {
             grid-template-columns: 1fr;
-            
+            gap: 1.5rem;
+
             .chart-con {
+                .charts {
+                    height: 350px;
+                }
+
                 .amount-con {
                     grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+
+                    div {
+                        padding: 1rem;
+
+                        h2 {
+                            font-size: 1.1rem;
+                        }
+
+                        p {
+                            font-size: 1.3rem;
+                        }
+                    }
                 }
             }
         }
     }
 
     @media (max-width: 768px) {
+        padding: 1rem;
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
         .stats-con {
+            gap: 1rem;
+
             .chart-con {
+                .charts {
+                    height: 300px;
+                }
+
                 .amount-con {
                     grid-template-columns: 1fr;
+                    gap: 0.8rem;
+
+                    div {
+                        padding: 0.8rem;
+
+                        h2 {
+                            font-size: 1rem;
+                        }
+
+                        p {
+                            font-size: 1.2rem;
+                        }
+                    }
+                }
+            }
+
+            .history-con {
+                h2 {
+                    font-size: 1.2rem;
+                    margin-bottom: 1rem;
+                }
+
+                .salary-item {
+                    padding: 0.8rem 1rem;
+
+                    p {
+                        font-size: 1.1rem;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 0.8rem;
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .stats-con {
+            .chart-con {
+                .charts {
+                    height: 250px;
+                }
+
+                .amount-con {
+                    div {
+                        padding: 0.6rem;
+
+                        h2 {
+                            font-size: 0.9rem;
+                        }
+
+                        p {
+                            font-size: 1rem;
+                        }
+                    }
+                }
+            }
+
+            .history-con {
+                .salary-item {
+                    padding: 0.6rem 0.8rem;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 0.3rem;
+
+                    p {
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 360px) {
+        padding: 0.5rem;
+
+        h1 {
+            font-size: 1.3rem;
+        }
+
+        .stats-con {
+            .chart-con {
+                .charts {
+                    height: 200px;
                 }
             }
         }

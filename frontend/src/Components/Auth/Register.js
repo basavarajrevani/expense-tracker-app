@@ -22,13 +22,9 @@ function Register() {
 
         try {
             await register(username, email, password);
-            navigate('/login', { 
-                replace: true,
-                state: { fromRegister: true }
-            });
+            navigate('/dashboard', { replace: true });
         } catch (err) {
             console.error('Registration error:', err);
-            setError(err.response?.data?.message || 'Registration failed');
         }
     };
 
@@ -330,6 +326,18 @@ const RegisterStyled = styled.div`
         }
     }
 
+    /* Enhanced Responsive Design */
+    @media (max-width: 1024px) {
+        .register-container {
+            padding: 1rem;
+        }
+
+        .register-content {
+            padding: 2rem;
+            max-width: 450px;
+        }
+    }
+
     @media (max-width: 768px) {
         .register-container {
             padding: 0.75rem;
@@ -337,19 +345,140 @@ const RegisterStyled = styled.div`
 
         .register-content {
             padding: 1.5rem;
+            max-width: 400px;
 
             .header {
-                margin-bottom: 1.25rem;
-                
+                margin-bottom: 1.5rem;
+
                 .logo {
                     h1 {
-                        font-size: 1.25rem;
+                        font-size: 1.4rem;
                     }
-                    
+
                     i {
-                        font-size: 1.5rem;
+                        font-size: 1.6rem;
                     }
                 }
+
+                .subtitle {
+                    font-size: 0.9rem;
+                }
+            }
+
+            .input-group {
+                margin-bottom: 1rem;
+
+                label {
+                    font-size: 0.9rem;
+                }
+
+                .input-control input {
+                    padding: 0.8rem 1rem;
+                    font-size: 0.9rem;
+                }
+            }
+
+            .submit-btn {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .register-container {
+            padding: 0.5rem;
+        }
+
+        .register-content {
+            padding: 1rem;
+            max-width: 350px;
+            border-radius: 15px;
+
+            .header {
+                margin-bottom: 1rem;
+
+                .logo {
+                    gap: 0.3rem;
+
+                    h1 {
+                        font-size: 1.2rem;
+                    }
+
+                    i {
+                        font-size: 1.4rem;
+                    }
+                }
+
+                .subtitle {
+                    font-size: 0.8rem;
+                    line-height: 1.4;
+                }
+            }
+
+            .input-group {
+                margin-bottom: 0.8rem;
+
+                label {
+                    font-size: 0.8rem;
+                    margin-bottom: 0.3rem;
+                }
+
+                .input-control input {
+                    padding: 0.7rem 0.8rem;
+                    font-size: 0.8rem;
+                    border-radius: 8px;
+
+                    &::placeholder {
+                        font-size: 0.75rem;
+                    }
+                }
+            }
+
+            .submit-btn {
+                padding: 0.7rem;
+                font-size: 0.8rem;
+                border-radius: 8px;
+            }
+
+            .login-link {
+                font-size: 0.8rem;
+                margin-top: 0.8rem;
+            }
+        }
+    }
+
+    @media (max-width: 360px) {
+        .register-content {
+            padding: 0.8rem;
+            max-width: 320px;
+
+            .header {
+                .logo {
+                    h1 {
+                        font-size: 1.1rem;
+                    }
+
+                    i {
+                        font-size: 1.2rem;
+                    }
+                }
+
+                .subtitle {
+                    font-size: 0.75rem;
+                }
+            }
+
+            .input-group {
+                .input-control input {
+                    padding: 0.6rem 0.7rem;
+                    font-size: 0.75rem;
+                }
+            }
+
+            .submit-btn {
+                padding: 0.6rem;
+                font-size: 0.75rem;
             }
         }
     }
@@ -366,6 +495,23 @@ const RegisterStyled = styled.div`
 
             .message {
                 margin-bottom: 0.75rem;
+                padding: 0.6rem;
+            }
+        }
+    }
+
+    @media (max-height: 600px) {
+        .register-content {
+            .header {
+                margin-bottom: 0.8rem;
+
+                .subtitle {
+                    display: none;
+                }
+            }
+
+            .input-group {
+                margin-bottom: 0.6rem;
             }
         }
     }

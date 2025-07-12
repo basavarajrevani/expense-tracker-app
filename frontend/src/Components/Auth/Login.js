@@ -304,19 +304,142 @@ const LoginStyled = styled.div`
         }
     }
 
-    @media (max-width: 768px) {
+    /* Enhanced Responsive Design */
+    @media (max-width: 1024px) {
         .login-container {
             padding: 1rem;
         }
 
         .login-content {
             padding: 2rem;
+            max-width: 450px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .login-container {
+            padding: 0.75rem;
+        }
+
+        .login-content {
+            padding: 1.5rem;
+            max-width: 400px;
+
+            .header {
+                margin-bottom: 1.5rem;
+
+                .logo {
+                    h1 {
+                        font-size: 1.4rem;
+                    }
+
+                    i {
+                        font-size: 1.6rem;
+                    }
+                }
+
+                .subtitle {
+                    font-size: 0.9rem;
+                }
+            }
+
+            .input-group {
+                margin-bottom: 1rem;
+
+                label {
+                    font-size: 0.9rem;
+                }
+
+                input {
+                    padding: 0.8rem 1rem;
+                    font-size: 0.9rem;
+                }
+            }
+
+            .submit-btn {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .login-container {
+            padding: 0.5rem;
+        }
+
+        .login-content {
+            padding: 1rem;
+            max-width: 350px;
+            border-radius: 15px;
+
+            .header {
+                margin-bottom: 1rem;
+
+                .logo {
+                    gap: 0.3rem;
+
+                    h1 {
+                        font-size: 1.2rem;
+                    }
+
+                    i {
+                        font-size: 1.4rem;
+                    }
+                }
+
+                .subtitle {
+                    font-size: 0.8rem;
+                    line-height: 1.4;
+                }
+            }
+
+            .input-group {
+                margin-bottom: 0.8rem;
+
+                label {
+                    font-size: 0.8rem;
+                    margin-bottom: 0.3rem;
+                }
+
+                input {
+                    padding: 0.7rem 0.8rem;
+                    font-size: 0.8rem;
+                    border-radius: 8px;
+                }
+            }
+
+            .submit-btn {
+                padding: 0.7rem;
+                font-size: 0.8rem;
+                border-radius: 8px;
+            }
+
+            .register-link {
+                font-size: 0.8rem;
+                margin-top: 0.8rem;
+            }
+        }
+    }
+
+    @media (max-width: 360px) {
+        .login-content {
+            padding: 0.8rem;
+            max-width: 320px;
 
             .header {
                 .logo {
                     h1 {
-                        font-size: 1.5rem;
+                        font-size: 1.1rem;
                     }
+
+                    i {
+                        font-size: 1.2rem;
+                    }
+                }
+
+                .subtitle {
+                    font-size: 0.75rem;
                 }
             }
         }

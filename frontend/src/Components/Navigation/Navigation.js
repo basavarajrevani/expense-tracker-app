@@ -12,6 +12,7 @@ function Navigation({active, setActive}) {
     const navigate = useNavigate();
     const { logout, user } = useAuth();
     const [showAvatarSelect, setShowAvatarSelect] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [currentAvatar, setCurrentAvatar] = useState(() => {
         const saved = localStorage.getItem('userAvatar');
         return saved || defaultAvatar;
@@ -20,6 +21,7 @@ function Navigation({active, setActive}) {
     const handleNavigation = (id, link) => {
         setActive(id);
         navigate(link);
+        setMobileMenuOpen(false); // Close mobile menu on navigation
     }
 
     const handleSignOut = () => {
@@ -39,7 +41,19 @@ function Navigation({active, setActive}) {
                 <div className="logo-con">
                     <h2>Expense Tracker</h2>
                 </div>
-                <ul className="menu-items">
+
+                {/* Mobile Menu Button */}
+                <button
+                    className="mobile-menu-btn"
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                {/* Desktop Menu */}
+                <ul className="menu-items desktop-menu">
                     {menuItems.map((item) => {
                         return <li
                             key={item.id}
@@ -51,12 +65,14 @@ function Navigation({active, setActive}) {
                         </li>
                     })}
                 </ul>
-                <div className="user-con">
+
+                {/* Desktop User Controls */}
+                <div className="user-con desktop-user">
                     <div className="user-info">
                         <span>{user?.username || 'User'}</span>
-                        <img 
-                            src={currentAvatar} 
-                            alt="user avatar" 
+                        <img
+                            src={currentAvatar}
+                            alt="user avatar"
                             onClick={() => setShowAvatarSelect(true)}
                         />
                     </div>
@@ -65,6 +81,39 @@ function Navigation({active, setActive}) {
                     </button>
                 </div>
             </NavStyled>
+
+            {/* Mobile Menu Overlay */}
+            {mobileMenuOpen && (
+                <MobileMenuOverlay onClick={() => setMobileMenuOpen(false)}>
+                    <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
+                        <div className="mobile-user-info">
+                            <img
+                                src={currentAvatar}
+                                alt="user avatar"
+                                onClick={() => setShowAvatarSelect(true)}
+                            />
+                            <span>{user?.username || 'User'}</span>
+                        </div>
+
+                        <ul className="mobile-menu-items">
+                            {menuItems.map((item) => {
+                                return <li
+                                    key={item.id}
+                                    onClick={() => handleNavigation(item.id, item.link)}
+                                    className={active === item.id ? 'active': ''}
+                                >
+                                    {item.icon}
+                                    <span>{item.title}</span>
+                                </li>
+                            })}
+                        </ul>
+
+                        <button className="mobile-sign-out" onClick={handleSignOut}>
+                            {signout} Sign Out
+                        </button>
+                    </div>
+                </MobileMenuOverlay>
+            )}
             {showAvatarSelect && (
                 <AvatarSelect 
                     onSelect={handleAvatarSelect}
@@ -90,6 +139,25 @@ const NavStyled = styled.nav`
     position: sticky;
     top: 0;
     z-index: 10;
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+        display: none;
+        flex-direction: column;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        gap: 0.3rem;
+
+        span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+    }
 
     .logo-con {
         h2 {
@@ -215,6 +283,176 @@ const NavStyled = styled.nav`
             .user-info span {
                 display: none;
             }
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        padding: 1rem 1.5rem;
+        gap: 1rem;
+
+        .menu-items {
+            gap: 1rem;
+
+            li {
+                padding: 0.6rem 1rem;
+
+                span {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+
+        .user-con {
+            .user-info {
+                span {
+                    font-size: 0.9rem;
+                }
+            }
+
+            .sign-out {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 1rem;
+
+        .mobile-menu-btn {
+            display: flex;
+        }
+
+        .desktop-menu,
+        .desktop-user {
+            display: none;
+        }
+
+        .logo-con {
+            h2 {
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 0.8rem;
+
+        .logo-con {
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+    }
+`;
+
+/* Mobile Menu Overlay */
+const MobileMenuOverlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end;
+
+    .mobile-menu {
+        width: 280px;
+        height: 100%;
+        background: white;
+        padding: 2rem 1.5rem;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .mobile-user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            span {
+                font-weight: 600;
+                color: var(--primary-color);
+            }
+        }
+
+        .mobile-menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            li {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding: 1rem;
+                border-radius: 12px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: rgba(0, 0, 0, 0.05);
+                }
+
+                &.active {
+                    background: var(--primary-color);
+                    color: white;
+
+                    i {
+                        color: white;
+                    }
+                }
+
+                i {
+                    color: rgba(34, 34, 96, 0.6);
+                    font-size: 1.2rem;
+                }
+
+                span {
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .mobile-sign-out {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            margin-top: auto;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .mobile-menu {
+            width: 100%;
         }
     }
 `;
