@@ -104,11 +104,11 @@ exports.login = async (req, res) => {
 // Get User Profile
 exports.getMe = async (req, res) => {
     try {
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.user._id);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        
+
         res.status(200).json({
             _id: user._id,
             username: user.username,
