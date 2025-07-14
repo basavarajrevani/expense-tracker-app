@@ -783,6 +783,43 @@ Authorization: Bearer <your_jwt_token>
 - **Protected Routes**: Authentication required for all user data
 - **Input Validation**: Server-side validation for all inputs
 - **CORS Configuration**: Secure cross-origin requests
+- **Environment Variables**: All sensitive data stored in .env files (never committed)
+- **Secure Headers**: Security headers implemented for production
+
+## 🛡️ Security Best Practices
+
+### **⚠️ IMPORTANT: Never Commit Sensitive Data**
+
+**Before deploying or pushing to GitHub:**
+
+1. **✅ Verify .env files are ignored**:
+   ```bash
+   git status
+   # Should NOT show .env files
+   ```
+
+2. **✅ Check for exposed credentials**:
+   ```bash
+   git log --oneline | head -10
+   # Review recent commits for any sensitive data
+   ```
+
+3. **✅ Use environment variables for**:
+   - MongoDB connection strings
+   - JWT secrets
+   - API keys
+   - Passwords
+   - Any sensitive configuration
+
+4. **✅ Always use .env.example files** with placeholder values
+
+### **🔄 If Credentials Are Accidentally Exposed:**
+
+1. **Immediately change all passwords and secrets**
+2. **Rotate JWT secrets**
+3. **Update MongoDB Atlas passwords**
+4. **Remove sensitive commits from Git history**
+5. **Update all deployment environment variables**
 
 ## 🤝 Contributing
 

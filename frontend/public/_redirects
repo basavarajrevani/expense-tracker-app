@@ -6,8 +6,8 @@
 /favicon.ico  /favicon.ico  200
 /manifest.json  /manifest.json  200
 
-# API routes should not be redirected
-/api/*  https://expense-tracker-backend-dnpy.onrender.com/api/:splat  200
+# API routes should not be redirected (handled by frontend)
+# /api/*  handled by REACT_APP_API_URL environment variable
 
 # App routes - redirect to index.html for React Router
 /dashboard  /index.html  200
